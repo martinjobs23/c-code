@@ -1,0 +1,124 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+////有一个数列，10个数，升序排好，从指定开始位置的n个数字，按照逆序排列重新输出新的完整数列
+//void scan(int arr[], int num) {
+//	for (int i = 0; i < num; i++) {
+//		scanf("%d", &arr[i]);
+//	}
+//}
+//void bubble_sort(int arr[], int num) {
+//	int i = 0;
+//	int j = 0;
+//	for (i = 0; i < num - 1; i++) {
+//		int flag = 0;
+//		for (j = 0; j < num - 1 - i; j++) {
+//			if (arr[j] > arr[j + 1]) {
+//				int tmp = arr[j];
+//				arr[j] = arr[j + 1];
+//				arr[j + 1] = tmp;
+//				flag = 1;
+//			}
+//		}
+//		if (flag == 0) {
+//			break;
+//		}
+//	}
+//}
+////判断并复制数组
+//void my_arrcpy(int *arr1, int *arr2, int num, int num1, int num2) {
+//	if (num1 + num2 - 1 > num) {
+//		printf("输入错误，未能成功复制。\n");
+//	}
+//	else
+//	{
+//		int i = 0;
+//		for (i = 0; i < num1-1; i++) {
+//			*(arr2 + i) = *(arr1 + i);
+//		}
+//		int left = num1 - 1;
+//		int right = left + num2 - 1;
+//		while (left <= num2) {
+//			*(arr2 + left) = *(arr1 + right);
+//			left++;
+//			right--;
+//		}
+//		for (i = 9; i >= num1 +num2 - 1; i--) {
+//			*(arr2 + i) = *(arr1 + i);
+//		}
+//		for (i = 0; i < 10; i++) {
+//			printf("%d ", *(arr2 + i));
+//		}
+//	}
+//}
+//int main() {
+//	int arr1[10] = {0};
+//	int arr2[10] = { 0 };
+//	printf("请输入10个数字：\n");
+//	scan(arr1, 10);
+//	bubble_sort(arr1, 10);
+//	unsigned int num1, num2;
+//	printf("请输入从第几个数字的位置开始进行倒序排列：");
+//	scanf("%d", &num1);
+//	printf("请输入排列的数字个数为几个：");
+//	scanf("%d", &num2);
+//	my_arrcpy(arr1, arr2, 10, num1, num2);
+//
+//	return 0;
+//}
+
+////写一个函数，可以逆序输出字符串的内容
+//void reverse(char*str1,char*str2,int sz) {
+//	int i = 0;
+//	for (i = 0; i < sz; i++) {
+//		*(str2 + i) = *(str1 + sz - 1 - i);
+//	}
+//	*(str2 + i) = '\0';
+//}
+//int main() {
+//	char str[20];
+//	char str2[20];
+//	printf("请输入一个字符串，按回车结束。\n");
+//	gets(str);
+//	int sz = strlen(str);
+//	reverse(str, str2, sz);
+//	puts(str2);
+//	return 0;
+//}
+
+//验证一个数字是不是水仙花数，该数字的所有位数的n次方之和为自己本身，n为自己位数
+int my_sxh(int *arr) {
+	int i = 10;
+	int num = 0;
+	for (i = 10; i < 100000; i++) {
+		int sum = 0;
+		int n = 1;
+		int tmp = i;
+		while (tmp = tmp / 10) {
+			n++;
+		}
+		tmp = i;
+		while(tmp){
+			sum += pow(tmp % 10, n);
+			tmp = tmp / 10;
+		}
+		if (sum == i) {
+			//printf("%d ", i);
+			*(arr + num) = i;
+			num++;
+		}
+	}
+	return num;
+}
+int main() {
+	int arr[30] = { 0 };
+	int i = 0;
+	int num = my_sxh(arr);
+	printf("10-100000共有%d个水仙花数，分别是：\n",num);
+	for (i = 0; i < num; i++) {
+		printf("%d ", *(arr + i));
+	}
+	return 0;
+}
