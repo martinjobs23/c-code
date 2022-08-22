@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+char* my_strstr(const char*str,const char*str2){
+    char* ret = NULL ;
+    const char *p = str2;
+    do{
+        //判断是否相等，相等与否都会进入下一个字符的判断，如果下一个字符不相等，str2回原位置。直到查找到str结束。
+        if (str2 != p) {//前面已经有字符相等了
+            if (*str == *str2) {
+                if(*str == '\0'){
+                    return p;
+                }
+                str2++;
+            }else
+                str2 = p;
+        }else{
+            if(*str == *str2){//相等
+                str2++;
+            }
+        }
+        str++;
+//        if (*str != *str2) {
+//            str++;
+//        }
+//        else{
+//            if (*str2 != '\0') {
+//                str++;
+//                str2++;
+//            }
+//            else{
+//                ret = p;
+//            }
+//        }
+    }while (*str != '\0') ;
+    return ret;
+}
+int main(int argc, const char * argv[]) {
+    // insert code here...
+    //printf("Hello, World!\n");
+    char arr[30]  = {0};
+    char arr2[30] = {0};
+    printf("请输入字符串str：\n");
+    gets(arr);
+    printf("请输入需查询的子字符串：\n");
+    gets(arr2);
+    char* ret = my_strstr(arr,arr2);
+    if (ret == NULL) {
+        printf("未找到子字符串。\n");
+    }
+    else{
+        printf("%s",ret);
+    }
+    return 0;
+}
