@@ -1,54 +1,63 @@
 #include <stdio.h>
-
-char* my_strstr(const char*str,const char*str2){
-    char* ret = NULL ;
-    const char *p = str2;
-    do{
+#include<string.h>
+char* my_strstr(const char* str, const char* str2) {
+    char* ret = NULL;
+    const char* p = str2;
+    int n=0;
+    int len = strlen(str2);
+    while(*str != '\0') {
         //判断是否相等，相等与否都会进入下一个字符的判断，如果下一个字符不相等，str2回原位置。直到查找到str结束。
         if (str2 != p) {//前面已经有字符相等了
             if (*str == *str2) {
-                if(*str == '\0'){
-                    return p;
+                if (*(str2+1) == '\0') {
+                    n = str2 - p;
+                    ret = str + n - len;
                 }
                 str2++;
-            }else
+            }
+            else
                 str2 = p;
-        }else{
-            if(*str == *str2){//相等
+        }
+        else {
+            if (*str == *str2) {//相等
+                if (*(str2 + 1) == '\0') {
+                    n = 1;
+                    ret = str + n - len;
+                }
                 str2++;
             }
         }
         str++;
-//        if (*str != *str2) {
-//            str++;
-//        }
-//        else{
-//            if (*str2 != '\0') {
-//                str++;
-//                str2++;
-//            }
-//            else{
-//                ret = p;
-//            }
-//        }
-    }while (*str != '\0') ;
+        //        if (*str != *str2) {
+        //            str++;
+        //        }
+        //        else{
+        //            if (*str2 != '\0') {
+        //                str++;
+        //                str2++;
+        //            }
+        //            else{
+        //                ret = p;
+        //            }
+        //        }
+    }
     return ret;
 }
-int main(int argc, const char * argv[]) {
+int main(int argc, const char* argv[]) {
     // insert code here...
     //printf("Hello, World!\n");
-    char arr[30]  = {0};
-    char arr2[30] = {0};
+    char arr[30] = { 0 };
+    char arr2[30] = { 0 };
     printf("请输入字符串str：\n");
     gets(arr);
     printf("请输入需查询的子字符串：\n");
     gets(arr2);
-    char* ret = my_strstr(arr,arr2);
+    char* ret = my_strstr(arr, arr2);
     if (ret == NULL) {
         printf("未找到子字符串。\n");
     }
-    else{
-        printf("%s",ret);
+    else {
+        printf("已找到，子串及其后面的字符串为%s", ret);
     }
     return 0;
 }
