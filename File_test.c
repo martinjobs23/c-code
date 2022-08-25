@@ -33,11 +33,11 @@
 //	return 0;
 //}
 
-struct S {
-	int n;
-	float score;
-	char arr[20];
-};
+//struct S {
+//	int n;
+//	float score;
+//	char arr[20];
+//};
 
 //int main() {
 //	struct S s = {100,3.14f,"hello,world"};
@@ -67,10 +67,32 @@ struct S {
 //	return 0;
 //}
 
+//int main() {
+//	struct S s = {100,3.14f,"hello,world"};
+//	char buf[200] = { 0 };
+//	sprintf(buf, "%d,%f,%s", s.n, s.score, s.arr);
+//	printf("%s" ,buf);
+//	return 0;
+//}
+struct S
+{
+	char name[20];
+	int age;
+	double score;
+};
 int main() {
-	struct S s = {100,3.14f,"hello,world"};
-	char buf[200] = { 0 };
-	sprintf(buf, "%d,%f,%s", s.n, s.score, s.arr);
-	printf("%s" ,buf);
+	FILE* pf = fopen("test.txt", "rb");
+	if (pf == NULL) {
+		printf("%s", strerror(errno));
+		return 0;
+	}
+	//struct S s = {"zhangsan",20,99.78};
+	//fwrite(&s, sizeof(struct S), 1, pf);
+	struct S s = { 0 };
+	fread(&s, sizeof(struct S), 1, pf);
+	printf("%s %d %lf", s.name, s.age, s.score);
+
+	fclose(pf);
+	pf = NULL;
 	return 0;
 }
